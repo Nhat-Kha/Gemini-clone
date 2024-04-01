@@ -14,6 +14,12 @@ export default function Main() {
     input,
   } = useContext(Context);
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSent();
+    }
+  };
+
   return (
     <div className="main">
       <div className="nav">
@@ -73,6 +79,7 @@ export default function Main() {
           <div className="search-box">
             <input
               onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
               value={input}
               type="text"
               placeholder="Enter a prompt here..."

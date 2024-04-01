@@ -5,6 +5,7 @@ import { Context } from "@/context/Context";
 
 export default function Sidebar() {
   const [extended, setExtended] = useState(false);
+  const [recentHeight, setRecentHeight] = useState("0px");
   const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context);
 
   const loadPrompt = async (prompt) => {
@@ -12,11 +13,20 @@ export default function Sidebar() {
     await onSent(prompt);
   };
 
+  const toggleExtended = () => {
+    setExtended((prev) => !prev);
+    if (!extended) {
+      setTimeout(() => setRecentHeight("auto"), 0);
+    } else {
+      setRecentHeight("0px");
+    }
+  };
+
   return (
     <div className="sidebar">
       <div className="top">
         <img
-          onClick={() => setExtended((prev) => !prev)}
+          onClick={toggleExtended}
           className="menu"
           src={assets.menu_icon}
           alt=""
