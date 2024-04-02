@@ -2,10 +2,17 @@ import { useContext, useState } from "react";
 import "./Sidebar.css";
 import { assets } from "@/assets/assets";
 import { Context } from "@/context/Context";
+import {
+  faBars,
+  faCircleQuestion,
+  faClockRotateLeft,
+  faGear,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Sidebar() {
   const [extended, setExtended] = useState(false);
-  const [recentHeight, setRecentHeight] = useState("0px");
   const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context);
 
   const loadPrompt = async (prompt) => {
@@ -13,53 +20,53 @@ export default function Sidebar() {
     await onSent(prompt);
   };
 
-  const toggleExtended = () => {
-    setExtended((prev) => !prev);
-    if (!extended) {
-      setTimeout(() => setRecentHeight("auto"), 0);
-    } else {
-      setRecentHeight("0px");
-    }
-  };
-
   return (
     <div className="sidebar">
       <div className="top">
-        <img
-          onClick={toggleExtended}
+        <FontAwesomeIcon
+          icon={faBars}
+          onClick={() => setExtended((prev) => !prev)}
           className="menu"
-          src={assets.menu_icon}
-          alt=""
+          style={{ width: "20px", height: "20px", textAlign: "right" }}
         />
         <div onClick={() => newChat()} className="new-chat">
-          <img src={assets.plus_icon} alt="" />
+          <FontAwesomeIcon icon={faPlus} style={{ with: "20px" }} />
           {extended ? <p>New Chat</p> : null}
         </div>
-        {extended ? (
-          <div className="recent">
-            <p className="recent-title">Recent</p>
-            {prevPrompts.map((item, index) => {
-              return (
-                <div onClick={() => {}} className="recent-entry">
-                  <img src={assets.message_icon} alt="" />
-                  <p>{item.slice(0, 18)}...</p>
-                </div>
-              );
-            })}
-          </div>
-        ) : null}
+        <div className="recent">
+          <p className="recent-title">Recent</p>
+          {extended
+            ? prevPrompts.map((item, index) => {
+                return (
+                  <div onClick={() => {}} className="recent-entry">
+                    <img src={assets.message_icon} alt="" />
+                    <p>{item.slice(0, 18)}...</p>
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
       <div className="bottom">
         <div className="bottom-item recent-entry">
-          <img src={assets.question_icon} alt="" />
+          <FontAwesomeIcon
+            icon={faCircleQuestion}
+            style={{ with: "20px", height: "20px", color: "white" }}
+          />
           {extended ? <p>Help</p> : null}
         </div>
         <div className="bottom-item recent-entry">
-          <img src={assets.history_icon} alt="" />
+          <FontAwesomeIcon
+            icon={faClockRotateLeft}
+            style={{ with: "20px", height: "20px", color: "white" }}
+          />
           {extended ? <p>Activity</p> : null}
         </div>
         <div className="bottom-item recent-entry">
-          <img src={assets.setting_icon} alt="" />
+          <FontAwesomeIcon
+            icon={faGear}
+            style={{ with: "20px", height: "20px", color: "white" }}
+          />
           {extended ? <p>Settings</p> : null}
         </div>
       </div>

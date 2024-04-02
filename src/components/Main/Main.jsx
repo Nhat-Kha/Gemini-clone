@@ -61,7 +61,13 @@ export default function Main() {
               <p>{recentPrompt}</p>
             </div>
             <div className="result-data">
-              <img src={assets.gemini_icon} alt="" />
+              <img
+                src={assets.gemini_icon}
+                alt=""
+                style={{
+                  animation: loading ? "spin 1s linear infinite" : "none",
+                }}
+              />
               {loading ? (
                 <div className="loader">
                   <hr />
@@ -88,8 +94,20 @@ export default function Main() {
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
               {input ? (
-                <img onClick={() => onSent()} src={assets.send_icon} alt="" />
-              ) : null}
+                <img
+                  onClick={() => onSent()}
+                  src={assets.send_icon}
+                  alt=""
+                  style={{ background: "whitesmoke" }}
+                />
+              ) : (
+                <img
+                  onClick={() => onSent()}
+                  src={assets.send_icon}
+                  alt=""
+                  style={{ opacity: 0.5 }}
+                />
+              )}
             </div>
           </div>
           <p className="bottom-info">

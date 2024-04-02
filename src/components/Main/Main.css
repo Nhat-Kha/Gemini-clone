@@ -3,6 +3,12 @@
   min-height: 100vh;
   padding-bottom: 15vh;
   position: relative;
+  --opacity: 1;
+  background-image: linear-gradient(
+    to right,
+    rgb(71, 68, 111),
+    rgb(157, 95, 96)
+  );
 }
 
 .main .nav {
@@ -11,7 +17,12 @@
   justify-content: space-between;
   font-size: 22px;
   padding: 20px;
-  color: #585858;
+}
+
+.main .nav p {
+  font-size: 40px;
+  font-weight: 500;
+  color: whitesmoke;
 }
 
 .main .nav img {
@@ -27,7 +38,7 @@
 .main .greet {
   margin: 50px 0px;
   font-size: 56px;
-  color: #c4c7c5;
+  color: whitesmoke;
   font-weight: 500;
   padding: 20px;
 }
@@ -48,7 +59,7 @@
 .main .card {
   height: 200px;
   padding: 15px;
-  background-color: #f0f4f9;
+  background-color: rgb(255 255 255 / 0.1);
   border-radius: 10px;
   position: relative;
   cursor: pointer;
@@ -65,12 +76,13 @@
 }
 
 .main .card p {
-  color: #585858;
+  color: white;
   font-size: 17px;
 }
 
 .main .card:hover {
-  background-color: #dfe4ea;
+  opacity: 1;
+  background-color: rgb(255 255 255/0.2);
 }
 
 .main-bottom {
@@ -88,8 +100,14 @@
   justify-content: center;
   gap: 20px;
   background-color: #f0f4f9;
+  opacity: 0.5;
   padding: 10px 20px;
   border-radius: 50px;
+}
+
+.search-box:focus-within {
+  background: white;
+  opacity: 0.8;
 }
 
 .search-box img {
@@ -102,6 +120,7 @@
   background: transparent;
   border: none;
   outline: none;
+
   padding: 8px;
   font-size: 18px;
 }
@@ -123,6 +142,9 @@
   padding: 0px 5px;
   max-height: 70vh;
   overflow-y: scroll;
+
+  background-color: rgba(211, 211, 211, 0.3);
+  border-radius: 25px;
 }
 
 .result::-webkit-scrollbar {
@@ -136,6 +158,12 @@
   gap: 20px;
 }
 
+.result-title p {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
 .result img {
   width: 40px;
   border-radius: 50%;
@@ -145,6 +173,22 @@
   display: flex;
   align-items: start;
   gap: 20px;
+}
+
+.result-data p {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.result-data img {
+  animation: spin 1s linear infinite;
 }
 
 .loader {
